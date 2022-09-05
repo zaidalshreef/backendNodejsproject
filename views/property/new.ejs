@@ -1,0 +1,38 @@
+<% layout('layouts/boilerplate'); %>
+
+<div class="row">
+
+    <h1 class="text-center"> new campground </h1>
+<div class="col-sm-6 offset-sm-3">
+    <form class="needs-validation" action="/campgrounds" method="POST" novalidate enctype="multipart/form-data" >
+        <div class="mb-3">
+            <label class="form-label" for="title">Name:</label>
+            <input class="form-control" id="title" type="text" name="campground[title]" placeholder="title" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="location">location:</label>
+            <input class="form-control" id="location" type="text" name="campground[location]" placeholder="location" required>
+        </div>
+        <div class="mb-3 custom-file">
+            <label class="form-label" for="image"> uplode images :</label>
+            <input type="file" id="image" name="image" class="form-control custom-file-input" multiple>
+            <label class="custom-file-label" for="image"></label>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="price">price:</label>
+            <div class="input-group ">
+                <span class="input-group-text" id="price-label">$</span>
+                <input id="price" type="text" class="form-control" name="campground[price]" placeholder="0.00" aria-label="price" aria-describedby="price-label" required>
+              </div>
+        </div>
+        <div class="mb-3">
+        <label class="form-label" for="description">description:</label>
+            <textarea class="form-control" id="description" type="text" name="campground[description]" placeholder="description" required></textarea>
+        </div>
+        <div class="d-grid gap-2">
+        <input class="btn btn-success mx-auto" type="submit" value="Add campground">
+        </div>
+    </form>
+</div>
+
+</div>
