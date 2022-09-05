@@ -26,8 +26,18 @@ const propertySchema = new Schema({
     plotWidth : {type:Number},
     plotLength: {type:Number},
     images: [imagesSchema],
-
-
+    geometry: {
+      type: {
+        type: String,
+        enum: ['Point'],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
+    },
+    
 },{timestamps : true})
 
 module.exports = mongoose.Model("property",propertySchema)
