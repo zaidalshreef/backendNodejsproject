@@ -1,11 +1,6 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const imagesSchema = new Schema({
-    url: String,
-    filename: String,
-  }
-  );
 
 const propertySchema = new Schema({
     title: {type:String, required:true},
@@ -25,7 +20,7 @@ const propertySchema = new Schema({
     deleted: {type:Boolean,default:false},
     plotWidth : {type:Number},
     plotLength: {type:Number},
-    images: [imagesSchema],
+    images: [String],
     geometry: {
       type: {
         type: String,
@@ -40,4 +35,4 @@ const propertySchema = new Schema({
     
 },{timestamps : true})
 
-module.exports = mongoose.Model("property",propertySchema)
+module.exports = mongoose.model("property",propertySchema)

@@ -9,13 +9,12 @@ if(process.env.NODE_ENV !== 'production') {
   const ejsMate = require("ejs-mate");
   const session = require("express-session");
   const flash = require("connect-flash");
-  const expressError = require("./utils/expressError");
-  const campgrounds = require("./routes/campgrounds");
-  const reviews = require("./routes/reviews");
-  const users = require("./routes/users");
+  const expressError = require("./util/expressError");
+  const campgrounds = require("./route/campgrounds");
+  const users = require("./route/user");
   const passport = require("passport");
   const localStrategy = require("passport-local");
-  const User = require("./models/user");
+  const User = require("./model/user");
   const mongoSanitize = require('express-mongo-sanitize');
   const helmet = require("helmet");
   const MongoStore = require('connect-mongo');
