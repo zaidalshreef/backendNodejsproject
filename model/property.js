@@ -13,25 +13,14 @@ const propertySchema = new Schema({
     streetWidth:{type:Number},
     streetDirection: {type:String},
     description: {type:String},
-    bedrooms: {type:Number, required:true},
-    bathrooms: {type:Number, required:true},
+    bedrooms: {type:Number, default:0},
+    bathrooms: {type:Number, default:0},
     agent: {type:Schema.Types.ObjectId, ref:"user"},
     available: {type:Boolean, default:true},
     deleted: {type:Boolean,default:false},
     plotWidth : {type:Number},
     plotLength: {type:Number},
     images: [String],
-    geometry: {
-      type: {
-        type: String,
-        enum: ['Point'],
-        required: true,
-      },
-      coordinates: {
-        type: [Number],
-        required: true,
-      },
-    },
     
 },{timestamps : true})
 

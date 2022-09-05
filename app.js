@@ -10,7 +10,7 @@ if(process.env.NODE_ENV !== 'production') {
   const session = require("express-session");
   const flash = require("connect-flash");
   const expressError = require("./util/expressError");
-  const campgrounds = require("./route/campgrounds");
+  const property = require("./route/property");
   const users = require("./route/user");
   const passport = require("passport");
   const localStrategy = require("passport-local");
@@ -25,7 +25,7 @@ if(process.env.NODE_ENV !== 'production') {
   
   
   
-  const dburl = `mongodb+srv://zaid:${process.env.password}@cluster0.kjvti.mongodb.net/Cluster0?retryWrites=true&w=majority`
+  const dburl = `mongodb://localhost:27017/app`
   
   // connect to the database
   mongoose.connect(dburl, {
@@ -40,6 +40,7 @@ if(process.env.NODE_ENV !== 'production') {
   
   // create express app
   const app = express();
+  app.use(express.json());
   
   // set view engine to ejs
   app.engine("ejs", ejsMate);
@@ -75,7 +76,7 @@ if(process.env.NODE_ENV !== 'production') {
   app.use(
     session({
       // name: "session",
-      secret: process.env.secret,
+      secret: "jhgkj",
       resave: false,
       saveUninitialized: true,
       store: store,
@@ -86,12 +87,7 @@ if(process.env.NODE_ENV !== 'production') {
     })
   );
   app.use(flash());
-  app.use(
-    helmet({
-      contentSecurityPolicy: false,
-      crossOriginEmbedderPolicy : false,
-    })
-  );
+  
   
   
   // use middleware for passport
@@ -118,8 +114,7 @@ if(process.env.NODE_ENV !== 'production') {
   
   // routes for the app (in order of priority)
   app.use("/", users);
-  app.use("/campgrounds", campgrounds);
-  app.use("/campgrounds/:id/reviews", reviews);
+  app.use("/property", property);
   
   // home page routes
   app.get("/", (req, res) => res.render("home"));
@@ -131,7 +126,7 @@ if(process.env.NODE_ENV !== 'production') {
   
   // error handling middleware
   app.use((err, req, res, next) => {
-    const { status = "500" } = err;
+    const { status = 500 } = err;
     if (!err.message) err.message = "Something went wrong";
     res.status(status).render("error", {
       err,

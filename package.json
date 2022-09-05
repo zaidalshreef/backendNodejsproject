@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -23,6 +24,7 @@
     "flash": "^1.1.0",
     "helmet": "^6.0.0",
     "joi": "^17.6.0",
+    "method-override": "^3.0.0",
     "mongoose": "^6.5.4",
     "mongoose-paginate-v2": "^1.7.0",
     "passport": "^0.6.0",

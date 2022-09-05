@@ -1,4 +1,5 @@
 const Property = require("../model/property");
+const { login } = require("./users");
 
 
 module.exports.index =  async (req, res, next) => {
@@ -9,17 +10,10 @@ module.exports.index =  async (req, res, next) => {
 
 }
 
-module.exports.propertyForSell =  async (req, res, next) => {
 
-    const property = await Property.find({sellingType:"sell",deleted:false})
+module.exports.propertyForRentOrSell =  async (req, res, next) => {
 
-    res.send(property)
-
-}
-
-module.exports.propertyForRent =  async (req, res, next) => {
-
-    const property = await Property.find({sellingType:"rent",deleted:false})
+    const property = await Property.find({sellingType:req.params.sellingType,deleted:false})
 
     res.send(property)
 
@@ -54,7 +48,8 @@ module.exports.deleteProperty = async (req, res, next) => {
 
 module.exports.create =  async (req, res, next) => {
 
-    const property =  Property.create(req.body.property)
+    const property = await Property.create(req.body.property)
+    console.log(property);
 
     res.send(property)
 
