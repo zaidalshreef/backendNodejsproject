@@ -1,6 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const imagesSchema = new Schema({
+    url: String,
+    filename: String,
+  }
+  );
+
+  imagesSchema.virtual('thumbnail').get(function () {
+    return this.url.replace("/upload", "/upload/w_150,h_150,c_scale");
+  }
+  );
 
 const propertySchema = new Schema({
     title: {type:String, required:true},
@@ -20,7 +30,7 @@ const propertySchema = new Schema({
     deleted: {type:Boolean,default:false},
     plotWidth : {type:Number},
     plotLength: {type:Number},
-    images: [String],
+    images: [imagesSchema],
     
 },{timestamps : true})
 

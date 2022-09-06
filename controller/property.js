@@ -1,4 +1,5 @@
 const Property = require("../model/property");
+const { cloudinary } = require("../cloudinary");
 
 
 module.exports.index =  async (req, res, next) => {
@@ -9,6 +10,7 @@ module.exports.index =  async (req, res, next) => {
 
 }
 
+module.exports.newproperty = (req, res, next) => res.render("property/new");
 
 module.exports.propertyForRentOrSell =  async (req, res, next) => {
 
