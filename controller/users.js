@@ -36,16 +36,21 @@ module.exports.createNewUser =  async (req, res, next) => {
 }
 
 module.exports.login =  (req, res, next) => {
-        const url = req.session.returnTo || "/campgrounds";
+        const url = req.session.returnTo || "/property";
         delete req.session.returnTo;
         res.redirect(url);
     }
 
 
 module.exports.logout =  (req, res, next) => {
-  req.logout();
+  req.logout(function(err) {
+    if (err) { 
+      return next(err);
+     }
+    }
+    )
   req.flash("success", "You are logged out");
-  const url = req.session.returnTo || "/campgrounds";
+  const url = req.session.returnTo || "/property";
   delete req.session.returnTo;
   res.redirect(url);
 }

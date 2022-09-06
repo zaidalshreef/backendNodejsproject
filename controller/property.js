@@ -15,7 +15,7 @@ module.exports.propertyForRentOrSell = async (req, res, next) => {
     deleted: false,
   });
 
-  res.send(property);
+  res.render("property");
 };
 
 module.exports.propertyById = async (req, res, next) => {
@@ -24,7 +24,7 @@ module.exports.propertyById = async (req, res, next) => {
     deleted: false,
   }).populate("agent");
 
-  res.send(property);
+  res.render("./property/show", { property});
 };
 module.exports.editPropertyForm = async (req, res, next) => {
   const property = await Property.findOne({
@@ -68,9 +68,9 @@ module.exports.create = async (req, res, next) => {
     url: file.path,
     filename: file.filename,
   }));
-
+  property.agent = req.user._id;
   await property.save();
 
 
-  res.redirect("/property")
+  res.redirect("/property/id/" + property._id)
 };
