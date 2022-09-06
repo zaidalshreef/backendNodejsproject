@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const catchAsync = require("../util/catchasync");
 const { index, create,propertyById,editProperty,deleteProperty,propertyForRentOrSell,newproperty } = require('../controller/property');
-const property = require("../model/property");
-
+const multer = require("multer");
+const {storage} = require("../cloudinary");
+const upload = multer({ storage });
 
 router.route('/').get(catchAsync(index)).post(catchAsync(create))
 
