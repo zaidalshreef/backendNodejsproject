@@ -9,10 +9,11 @@ module.exports.registerForm =  (req, res, next) => {
 
 module.exports.createNewUser =  async (req, res, next) => {
     try {
-      const { username, email, password } = req.body;
+      const { username, email, password,phoneNumber } = req.body;
       const user = new User({
         username,
         email,
+        phoneNumber,
       });
       const registeredUser = await User.register(user, password);
       req.login(registeredUser, (err) => {

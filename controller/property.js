@@ -1,5 +1,4 @@
 const Property = require("../model/property");
-const { login } = require("./users");
 
 
 module.exports.index =  async (req, res, next) => {
