@@ -6,7 +6,7 @@ const multer = require("multer");
 const {storage} = require("../cloudinary");
 const upload = multer({ storage });
 
-router.route('/').get(catchAsync(index)).post(catchAsync(create))
+router.route('/').get(catchAsync(index)).post(upload.array("image"),catchAsync(create))
 
 router.get("/new", newproperty);
 

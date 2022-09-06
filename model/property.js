@@ -20,7 +20,7 @@ const propertySchema = new Schema({
     propertyType:{type:String, required:true},
     propertySize:{type:String, required:true},
     description: {type:String},
-    rooms: {type:Number, default:0},
+    rooms: {type:Number},
     agent: {type:Schema.Types.ObjectId, ref:"user"},
     available: {type:Boolean, default:true},
     deleted: {type:Boolean,default:false},

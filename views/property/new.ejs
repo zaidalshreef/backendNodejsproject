@@ -1,65 +1,119 @@
 <% layout('layouts/boilerplate'); %>
 
 <div class="row">
+  <div class="col-sm-6 offset-sm-3 mb-2">
+    <form
+      class="needs-validation"
+      action="/property"
+      method="POST"
+      novalidate
+      enctype="multipart/form-data"
+    >
+      <div class="mb-3">
+        <label class="form-label" for="title">Title:</label>
+        <input
+          class="form-control"
+          id="title"
+          type="text"
+          name="property[title]"
+          placeholder="title"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="SellingType">SellingType : </label>
 
-<div class="col-sm-6 offset-sm-3">
-    <form class="needs-validation" action="/property" method="POST" novalidate enctype="multipart/form-data" >
-        <div class="mb-3">
-            <label class="form-label" for="title">Name:</label>
-            <input class="form-control" id="title" type="text" name="property[title]" placeholder="title" required>
+        <select name="property[sellingType]" id="SellingType">
+          <option value="sell">sell</option>
+          <option value="rent">rent</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="rentType" >RentType : </label>
+        <select name="property[rentType]" id="rentType" disabled>
+          <option value="day">day</option>
+          <option value="month">month</option>
+          <option value="year">year</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="propertyType">Property Type:</label>
+        <input
+          class="form-control"
+          id="propertyType"
+          type="text"
+          name="property[sellingType]"
+          placeholder="Property Type"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="propertySize">Property Size:</label>
+        <input
+          class="form-control"
+          id="propertySize"
+          type="text"
+          name="property[propertySize]"
+          placeholder="Property Size"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="rooms">Rooms:</label>
+        <input
+          class="form-control"
+          id="rooms"
+          type="number"
+          name="property[rooms]"
+          placeholder="Number of Rooms"
+          required
+        />
+      </div>
+      <div class="mb-3 custom-file">
+        <label class="form-label" for="image"> Upload images :</label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          class="form-control custom-file-input"
+          multiple
+        />
+        <label class="custom-file-label" for="image"></label>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="price">price:</label>
+        <div class="input-group">
+          <span class="input-group-text" id="price-label">$</span>
+          <input
+            id="price"
+            type="text"
+            class="form-control"
+            name="property[price]"
+            placeholder="0.00"
+            aria-label="price"
+            aria-describedby="price-label"
+            required
+          />
         </div>
-        <div class="mb-3">
-            <label class="form-label" for="location">location:</label>
-            <input class="form-control" id="location" type="text" name="property[sellingType]" placeholder="location" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="location">location:</label>
-            <input class="form-control" id="location" type="text" name="property[sellingType]" placeholder="location" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="location">location:</label>
-            <input class="form-control" id="location" type="text" name="property[sellingType]" placeholder="location" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="location">location:</label>
-            <input class="form-control" id="location" type="text" name="property[sellingType]" placeholder="location" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="location">location:</label>
-            <input class="form-control" id="location" type="text" name="property[sellingType]" placeholder="location" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="location">location:</label>
-            <input class="form-control" id="location" type="text" name="property[sellingType]" placeholder="location" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="location">location:</label>
-            <input class="form-control" id="location" type="text" name="property[sellingType]" placeholder="location" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="location">location:</label>
-            <input class="form-control" id="location" type="text" name="property[sellingType]" placeholder="location" required>
-        </div>
-        <div class="mb-3 custom-file">
-            <label class="form-label" for="image"> uplode images :</label>
-            <input type="file" id="image" name="image" class="form-control custom-file-input" multiple>
-            <label class="custom-file-label" for="image"></label>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="price">price:</label>
-            <div class="input-group ">
-                <span class="input-group-text" id="price-label">$</span>
-                <input id="price" type="text" class="form-control" name="property[price]" placeholder="0.00" aria-label="price" aria-describedby="price-label" required>
-              </div>
-        </div>
-        <div class="mb-3">
+      </div>
+      <div class="mb-3">
         <label class="form-label" for="description">description:</label>
-            <textarea class="form-control" id="description" type="text" name="campground[description]" placeholder="description" required></textarea>
-        </div>
-        <div class="d-grid gap-2 mb-10">
-        <input class="btn btn-success mx-auto" type="submit" value="Add property">
-        </div>
+        <textarea
+          class="form-control"
+          id="description"
+          type="text"
+          name="property[description]"
+          placeholder="description"
+          required
+        ></textarea>
+      </div>
+      <div class="d-grid gap-2 mb-10">
+        <input
+          class="btn btn-success mx-auto"
+          type="submit"
+          value="Add Property"
+        />
+      </div>
     </form>
-</div>
-
+  </div>
 </div>
