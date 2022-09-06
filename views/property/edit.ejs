@@ -2,59 +2,145 @@
 
 <link rel="stylesheet" href="/styles/imagescheckbox.css" />
 
-
 <div class="row">
-    <h1 class="text-center"> edit property </h1>
-    <div class="col-sm-6 offset-sm-3">
-        <form action="/property/id/<%= property._id %>?_method=PUT" method="POST" novalidate class="needs-validation"
-            enctype="multipart/form-data">
-            <div class="mb-3">
-                <label class="form-label" for="title">Name:</label>
-                <input class="form-control" id="title" type="text" name="campground[title]" placeholder="title"
-                    value="<%= property.title %>" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="location">location:</label>
-                <input class="form-control" id="location" type="text" name="campground[location]" placeholder="location"
-                    value="<%= property.location %>" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="price">price:</label>
-                <div class="input-group ">
-                    <span class="input-group-text" id="price-label">$</span>
-                    <input id="price" type="text" class="form-control" name="campground[price]" placeholder="0.00"
-                        aria-label="price" aria-describedby="price-label" value="<%= property.price %>" required>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="description">description:</label>
-                <textarea class="form-control" id="description" type="text" name="campground[description]"
-                    placeholder="description" required><%= property.description %></textarea>
-            </div>
+  <div class="col-sm-6 offset-sm-3">
+    <form
+      action="/property/id/<%= property._id %>?_method=PUT"
+      method="POST"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
+      <div class="mb-3">
+        <label class="form-label" for="title">Title:</label>
+        <input
+          class="form-control"
+          id="title"
+          type="text"
+          name="property[title]"
+          placeholder="title"
+          value="<%= property.title %>"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="SellingType">SellingType : </label>
 
-            <div class="mb-3 custom-file">
-                <label class="form-label" for="image">Add images :</label>
-                <input type="file" id="image" name="image" class="form-control custom-file-input" multiple>
-                <label class="custom-file-label" for="image"></label>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">select images to delete:</label>
-                <div class="row">
-                    <% property.images.forEach(function(image,i){ %>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]"  value ="<%= image.filename %>" >
-                            <label id="image-checkbox" for="image-<%=i%>">
-                                <img src="<%= image.url %>" alt="#" class="">
-                            </label>
-                        </div>
-                        <% }) %>
-                    </div>
-                </div>
-                <div class="d-grid gap-2 ms-4 ">
-                    <input class="btn btn-success mb-3" type="submit" value="update campground">
-                </div>       
-                </form>
-    </div>
+        <select name="property[sellingType]" id="SellingType">
+          <option value="sell">sell</option>
+          <option value="rent">rent</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="rentType">RentType : </label>
+        <select name="property[rentType]" id="rentType" disabled>
+          <option value="day">day</option>
+          <option value="month">month</option>
+          <option value="year">year</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="propertyType">Property Type:</label>
+        <input
+          class="form-control"
+          id="propertyType"
+          type="text"
+          name="property[propertyType]"
+          placeholder="Property Type"
+          value="<%= property.propertyType %>"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="propertySize">Property Size:</label>
+        <input
+          class="form-control"
+          id="propertySize"
+          type="text"
+          name="property[propertySize]"
+          placeholder="Property Size"
+          value="<%= property.propertySize %>"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="rooms">Rooms:</label>
+        <input
+          class="form-control"
+          id="rooms"
+          type="number"
+          name="property[rooms]"
+          placeholder="Number of Rooms"
+          value="<%= property.rooms %>"
+          required
+        />
+      </div>
+      <div class="mb-3 custom-file">
+        <label class="form-label" for="image"> Upload images :</label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          class="form-control custom-file-input"
+          multiple
+        />
+        <label class="custom-file-label" for="image"></label>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="price">price:</label>
+        <div class="input-group">
+          <span class="input-group-text" id="price-label">$</span>
+          <input
+            id="price"
+            type="text"
+            class="form-control"
+            name="property[price]"
+            placeholder="0.00"
+            aria-label="price"
+            aria-describedby="price-label"
+            value="<%= property.price %>"
+            required
+          />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="description">description:</label>
+        <textarea
+          class="form-control"
+          id="description"
+          type="text"
+          name="property[description]"
+          placeholder="description"
+          required
+        ><%= property.description %>
+    </textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">select images to delete:</label>
+        <div class="row">
+          <% property.images.forEach(function(image,i){ %>
+          <div class="col-xl-3 col-lg-4 col-sm-6">
+            <input
+              type="checkbox"
+              id="image-<%=i%>"
+              name="deleteImages[]"
+              value="<%= image.filename %>"
+            />
+            <label id="image-checkbox" for="image-<%=i%>">
+              <img src="<%= image.url %>" alt="#" class="" />
+            </label>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+      <div class="d-grid gap-2 ms-4">
+        <input
+          class="btn btn-success mb-3"
+          type="submit"
+          value="Update Property"
+        />
+      </div>
+    </form>
+  </div>
 </div>
-
+<script src="/js/renttype.js"></script>

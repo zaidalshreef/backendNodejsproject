@@ -25,7 +25,7 @@ if(process.env.NODE_ENV !== 'production') {
   
   
   
-  const dburl = `mongodb://localhost:27017/app`
+  const dburl = process.env.dburl
   
   // connect to the database
   mongoose.connect(dburl, {
@@ -76,7 +76,7 @@ if(process.env.NODE_ENV !== 'production') {
   app.use(
     session({
       // name: "session",
-      secret: "jhgkj",
+      secret: process.env.secret,
       resave: false,
       saveUninitialized: true,
       store: store,
