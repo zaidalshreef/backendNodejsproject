@@ -27,6 +27,15 @@ module.exports.propertyById = async (req, res, next) => {
 
 
 }
+module.exports.editPropertyForm = async (req, res, next) => { 
+
+    const property = await Property.findOne({_id:req.params.id,deleted:false})
+
+
+    res.send(property)
+
+}
+
 
 module.exports.editProperty = async (req, res, next) => { 
 
