@@ -72,5 +72,5 @@ module.exports.create = async (req, res, next) => {
   await property.save();
 
 
-  res.send(property);
+  res.redirect("/property")
 };
