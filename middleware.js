@@ -1,5 +1,5 @@
-const { campgroundSchema } = require("./schemajoi");
-const Campground = require("./model/campground");
+const { PropertySchema } = require("./schemajoi");
+const Property = require("./model/property");
 const expressError = require("./util/expressError");
 
 module.exports.isLoggedIn = (req, res, next) => {
@@ -11,8 +11,8 @@ module.exports.isLoggedIn = (req, res, next) => {
   res.redirect("/login");
 };
 
-module.exports.validateCampground = (req, res, next) => {
-  const { error } = campgroundSchema.validate(req.body);
+module.exports.validateProperty = (req, res, next) => {
+  const { error } = PropertySchema.validate(req.body);
   if (error) {
     const msg = error.details.map((d) => d.message).join(", ");
     throw new expressError(msg, 400);
@@ -24,12 +24,12 @@ module.exports.validateCampground = (req, res, next) => {
 
 module.exports.isAuthor = async (req, res, next) => {
     const { id } = req.params;
-    const campground = await Campground.findById(id)
-    if (campground.author.equals(req.user._id)) {
+    const property = await Property.findById(id)
+    if (property.agent.equals(req.user._id)) {
         next();
     } else {
         req.flash("error", "You don't have permission to do that");
-        res.redirect("/campgrounds/"+id);
+        res.redirect("/property/id/"+id);
     }
 }
 

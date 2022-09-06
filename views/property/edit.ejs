@@ -4,32 +4,32 @@
 
 
 <div class="row">
-    <h1 class="text-center"> edit campground </h1>
+    <h1 class="text-center"> edit property </h1>
     <div class="col-sm-6 offset-sm-3">
-        <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" novalidate class="needs-validation"
+        <form action="/property/id/<%= property._id %>?_method=PUT" method="POST" novalidate class="needs-validation"
             enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label" for="title">Name:</label>
                 <input class="form-control" id="title" type="text" name="campground[title]" placeholder="title"
-                    value="<%= campground.title %>" required>
+                    value="<%= property.title %>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="location">location:</label>
                 <input class="form-control" id="location" type="text" name="campground[location]" placeholder="location"
-                    value="<%= campground.location %>" required>
+                    value="<%= property.location %>" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="price">price:</label>
                 <div class="input-group ">
                     <span class="input-group-text" id="price-label">$</span>
                     <input id="price" type="text" class="form-control" name="campground[price]" placeholder="0.00"
-                        aria-label="price" aria-describedby="price-label" value="<%= campground.price %>" required>
+                        aria-label="price" aria-describedby="price-label" value="<%= property.price %>" required>
                 </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description">description:</label>
                 <textarea class="form-control" id="description" type="text" name="campground[description]"
-                    placeholder="description" required><%= campground.description %></textarea>
+                    placeholder="description" required><%= property.description %></textarea>
             </div>
 
             <div class="mb-3 custom-file">
@@ -41,7 +41,7 @@
             <div class="mb-3">
                 <label class="form-label">select images to delete:</label>
                 <div class="row">
-                    <% campground.images.forEach(function(image,i){ %>
+                    <% property.images.forEach(function(image,i){ %>
                     <div class="col-xl-3 col-lg-4 col-sm-6">
                             <input type="checkbox" id="image-<%=i%>" name="deleteImages[]"  value ="<%= image.filename %>" >
                             <label id="image-checkbox" for="image-<%=i%>">

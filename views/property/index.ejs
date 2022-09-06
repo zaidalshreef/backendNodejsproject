@@ -1,42 +1,33 @@
 <% layout('layouts/boilerplate'); %>
 
-<div id="map" style="width: 100%; height: 500px;"></div>
+<link rel="stylesheet" href="/styles/index.css" />
 
-
-
-<div class = "container text-center my-2">
-  <div class="d-grid gap-2 d-md-block mx-auto">
-  <a class="btn btn-outline-secondary shadow my-5 rounded" href="campgrounds/new"><h2>Create New Campground</h2></a>
-  </div>
-</div>
-<% campgrounds.docs.forEach(function(campground) { %>
-<div class="card mb-3">
+<% propertys.forEach(function(property) { %>
+<div class="card mb-3"style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
-      <% if (campground.images.length){ %> 
+      <% if (property.images.length){ %>
       <img
         class="img-fluid rounded-start"
-        src="<%= campground.images[0].url%>"
-        alt="<%= campground.title %>"
+        src="<%= property.images[0].url%>"
+        alt="<%= property.title %>"
         style="width: 100%"
       />
       <% }else{ %>
-        <img
+      <img
         class="img-fluid rounded-start"
         src="https://res.cloudinary.com/doh1l2ew2/image/upload/v1652365183/yelpcamp/noyu00z1ap2s4nqorqi9.jpg"
-        alt="<%= campground.title %>"
+        alt="<%= property.title %>"
         style="width: 100%"
       />
       <% } %>
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title"><%= campground.title %></h5>
-        <p class="card-text"><%= campground.description %></p>
-        <p class="card-text">
-          <small class="text-muted"> <%= campground.location %> </small>
-        </p>
-        <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>"
+        <h5 class="card-title"><%= property.title %></h5>
+        <p class="card-text mt-5"><%= property.description %></p>
+        <p class="card-text mt-5"><small class="text-muted">last Updated: <%= property.updatedAt %></small></p>
+        <a class="btn btn-primary mt-1" href="/property/id/<%= property._id %>"
           >more info</a
         >
       </div>
@@ -44,26 +35,3 @@
   </div>
 </div>
 <% }); %>
-
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="campgrounds?page=<%=campgrounds.prevPage%>" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="campgrounds?page=<%=campgrounds.page%>"><%=campgrounds.page%></a></li>
-    <li class="page-item"><a class="page-link" href="campgrounds?page=<%=campgrounds.nextPage%>"><%=campgrounds.nextPage%></a></li>
-    <li class="page-item">
-      <a class="page-link" href="campgrounds?page=<%=afterNextPage%>" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-
-<script>
-  const campgrounds = { features: <%-JSON.stringify(allcampgrounds) %>};
-  </script>
-
-<script src="/js/cluster.js"></script>

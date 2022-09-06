@@ -1,7 +1,23 @@
 .maxWidth{
-    max-width:360px;
+    max-width:560px;
 }
 .border-1{
     margin-top: 2rem;
     border-radius: 5px;
+}
+.col{
+    min-width: 340px;
+}
+
+.carousel-item{
+    max-height: 350px;
+    
+}
+
+.name{
+    margin-bottom: -03.5rem;
+}
+
+.index{
+    z-index: 10;
 }

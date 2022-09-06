@@ -22,8 +22,10 @@ module.exports.createNewUser =  async (req, res, next) => {
         res.redirect("/campgrounds");
       });
     } catch (e) {
-      if (e.message.includes("E11000")) {
-      req.flash("error", "Email already in use");
+      if (e.message.includes("phoneNumber")) {
+      req.flash("error", "PhoneNumber already in use");
+      }else if (e.message.includes("email")) {
+        req.flash("error", "Email already in use");      
       } else {
       req.flash("error", e.message);
       }
