@@ -1,14 +1,19 @@
 # 
 
-## API Reference
+## API Of Property 
 
 ### Endpoints
 
 GET '/property'
+
 POST '/property'
+
 GET '/property/:sellingType'
+
 GET '/property/id/:id'
+
 PUT '/property/id/:id'
+
 DELETE '/property/id/:id'
 
 
