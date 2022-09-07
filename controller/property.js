@@ -1,21 +1,13 @@
 const Property = require("../model/property");
 const { cloudinary } = require("../cloudinary");
 
-
-
 module.exports.index = async (req, res, next) => {
-  const propertys = await Property.find({deleted: false});
+  const propertys = await Property.find({ deleted: false });
 
-  res.render("property/index", { propertys});
+  res.render("property/index", { propertys });
 };
 
-
-
-
 module.exports.newproperty = (req, res, next) => res.render("property/new");
-
-
-
 
 module.exports.propertyForRentOrSell = async (req, res, next) => {
   const propertys = await Property.find({
@@ -23,12 +15,8 @@ module.exports.propertyForRentOrSell = async (req, res, next) => {
     deleted: false,
   });
 
-  res.render("property",{propertys});
+  res.render("property", { propertys });
 };
-
-
-
-
 
 module.exports.propertyById = async (req, res, next) => {
   const property = await Property.findOne({
@@ -41,12 +29,8 @@ module.exports.propertyById = async (req, res, next) => {
     return res.redirect("/property");
   }
 
-  res.render("./property/show", { property});
+  res.render("./property/show", { property });
 };
-
-
-
-
 
 module.exports.editPropertyForm = async (req, res, next) => {
   const property = await Property.findOne({
@@ -54,11 +38,8 @@ module.exports.editPropertyForm = async (req, res, next) => {
     deleted: false,
   });
 
-  res.render("property/edit", { property});
+  res.render("property/edit", { property });
 };
-
-
-
 
 module.exports.editProperty = async (req, res, next) => {
   const property = await Property.findOneAndUpdate(
@@ -86,11 +67,6 @@ module.exports.editProperty = async (req, res, next) => {
   res.redirect("/property/id/" + req.params.id);
 };
 
-
-
-
-
-
 module.exports.deleteProperty = async (req, res, next) => {
   const property = await Property.findByIdAndUpdate(req.params.id, {
     deleted: true,
@@ -109,10 +85,8 @@ module.exports.deleteProperty = async (req, res, next) => {
 
 // }
 
-
-
 module.exports.create = async (req, res, next) => {
-  const property =  new Property(req.body.property);
+  const property = new Property(req.body.property);
 
   property.images = req.files.map((file) => ({
     url: file.path,
@@ -123,5 +97,5 @@ module.exports.create = async (req, res, next) => {
 
   req.flash("success", "Property created successfully");
 
-  res.redirect("/property/id/" + property._id)
+  res.redirect("/property/id/" + property._id);
 };
