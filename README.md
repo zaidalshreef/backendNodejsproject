@@ -20,6 +20,12 @@ DELETE '/property/id/:id'
 
 
 
+
+
+
+
+
+
 #### GET '/property'
 - Fetches  propertys :
     - *Returns: a list of property 
