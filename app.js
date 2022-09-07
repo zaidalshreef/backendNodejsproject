@@ -128,7 +128,7 @@ if(process.env.NODE_ENV !== 'production') {
   app.use((err, req, res, next) => {
     const { status = 500 } = err;
     if (!err.message) err.message = "Something went wrong";
-    res.status(status).render("error", {
+    res.status(status).json("error", {
       err,
     });
   });

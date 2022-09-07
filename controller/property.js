@@ -4,10 +4,10 @@ const { cloudinary } = require("../cloudinary");
 module.exports.index = async (req, res, next) => {
   const propertys = await Property.find({ deleted: false }).sort({updatedAt: -1});
 
-  res.render("property/index", { propertys });
+  res.json(propertys);
 };
 
-module.exports.newproperty = (req, res, next) => res.render("property/new");
+// module.exports.newproperty = (req, res, next) => res.render("property/new");
 
 module.exports.propertyForRentOrSell = async (req, res, next) => {
   const propertys = await Property.find({
@@ -15,7 +15,7 @@ module.exports.propertyForRentOrSell = async (req, res, next) => {
     deleted: false,
   }).sort({updatedAt: -1});
 
-  res.render("property", { propertys });
+  res.json(propertys);
 };
 
 module.exports.propertyById = async (req, res, next) => {
@@ -25,21 +25,20 @@ module.exports.propertyById = async (req, res, next) => {
   }).populate("agent");
 
   if (!property) {
-    req.flash("error", "Property not found");
-    return res.redirect("/property");
+    return res.json({property:"not found"});
   }
 
-  res.render("./property/show", { property });
+  res.json(property);
 };
 
-module.exports.editPropertyForm = async (req, res, next) => {
-  const property = await Property.findOne({
-    _id: req.params.id,
-    deleted: false,
-  });
+// module.exports.editPropertyForm = async (req, res, next) => {
+//   const property = await Property.findOne({
+//     _id: req.params.id,
+//     deleted: false,
+//   });
 
-  res.render("property/edit", { property });
-};
+//   res.render("property/edit", { property });
+// };
 
 module.exports.editProperty = async (req, res, next) => {
   const property = await Property.findOneAndUpdate(
@@ -63,17 +62,15 @@ module.exports.editProperty = async (req, res, next) => {
       $pull: { images: { filename: { $in: req.body.deleteImages } } },
     });
   }
-  req.flash("success", "property updated successfully");
-  res.redirect("/property/id/" + req.params.id);
+  res.json({"success": true});
 };
 
 module.exports.deleteProperty = async (req, res, next) => {
   const property = await Property.findByIdAndUpdate(req.params.id, {
     deleted: true,
   });
-  req.flash("success", "Property deleted successfully");
 
-  res.redirect("/property");
+  res.json({"success": true});
 };
 
 // module.exports.create =  async (req, res, next) => {
@@ -92,10 +89,9 @@ module.exports.create = async (req, res, next) => {
     url: file.path,
     filename: file.filename,
   }));
-  property.agent = req.user._id;
+  // property.agent = req.user._id;
   await property.save();
 
-  req.flash("success", "Property created successfully");
 
-  res.redirect("/property/id/" + property._id);
+  res.json({"success": true});
 };
