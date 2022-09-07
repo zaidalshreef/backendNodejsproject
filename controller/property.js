@@ -2,7 +2,7 @@ const Property = require("../model/property");
 const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async (req, res, next) => {
-  const propertys = await Property.find({ deleted: false });
+  const propertys = await Property.find({ deleted: false }).sort({updatedAt: -1});
 
   res.render("property/index", { propertys });
 };
@@ -13,7 +13,7 @@ module.exports.propertyForRentOrSell = async (req, res, next) => {
   const propertys = await Property.find({
     sellingType: req.params.sellingType,
     deleted: false,
-  });
+  }).sort({updatedAt: -1});
 
   res.render("property", { propertys });
 };

@@ -10,7 +10,9 @@
           <a class="nav-link" href="/property">Home</a>
           <a class="nav-link" href="/property/sell">Buy</a>
           <a class="nav-link" href="/property/rent">Rent</a>
+          <% if(currentUser){  %> 
           <a class="nav-link" href="/property/new">New Property</a>
+          <% } %>
         </div>
         <div class="navbar-nav  ms-auto">
           <% if(!currentUser){  %> 

@@ -13,4 +13,6 @@
     max-height: 350px;
     
 }
-
+.desc{
+    white-space: pre-wrap;
+}
