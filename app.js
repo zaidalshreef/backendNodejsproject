@@ -117,7 +117,7 @@ if(process.env.NODE_ENV !== 'production') {
   app.use("/property", property);
   
   // home page routes
-  app.get("/", (req, res) => res.render("home"));
+  app.get("/", (req, res) => res.redirect("/property"));
   
   // ------------------------------------------------- //
   app.all("*", (req, res, next) => {
